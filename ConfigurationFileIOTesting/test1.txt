@@ -1,8 +1,0 @@
-[Backup]
-SERVER_PATH=tada
-INTERVAL=240
-
-[Category 2]
-
-[Category 3]
-What=this

@@ -11,8 +11,7 @@ namespace ConfigurationFileIO
     /// </summary>
     public class ConfigurationFile
     {
-        private string _configurationFilePath;
-        private ConfigurationSettings _settings;
+        private ConfigurationSettings _settings = new ConfigurationSettings();
         private char _delimiter;
 
         /// <summary>
@@ -21,35 +20,20 @@ namespace ConfigurationFileIO
         /// Use <see cref="CategoryExists(string)"/> and <see cref="SettingExists(string, string)"/> to check if a category
         /// or a setting exists in the configuration file.
         /// </summary>
-        /// <param name="configurationFilePath">File path to the configuration file.</param>
         /// <param name="demiliter">Delimiter which will separate setting names from values.</param>
-        /// <exception cref="AccessingConfigurationFileFailed"></exception>
-        public ConfigurationFile(string configurationFilePath, char demiliter='=')
+        public ConfigurationFile(char demiliter='=')
         {
-            _configurationFilePath = configurationFilePath;
             _delimiter = demiliter;
-
-            if (!File.Exists(_configurationFilePath))
-            {
-                try
-                {
-                    File.WriteAllText(_configurationFilePath, "");
-                }
-                catch
-                {
-                    throw new System.Exception($"Could not create configuration file with path {_configurationFilePath}.");
-                }
-                
-            }
         }
 
         /// <summary>
         /// Read the settings from the configuration file.
         /// </summary>
+        /// <param name="configurationFilePath">The file to the configuration file to read from.</param>
         /// <exception cref="AccessingConfigurationFileFailed"></exception>
-        private void ReadSettings()
+        public void ReadSettings(string configurationFilePath)
         {
-            ConfigurationFileReader configurationFileReader = new ConfigurationFileReader(_configurationFilePath, _delimiter);
+            ConfigurationFileReader configurationFileReader = new ConfigurationFileReader(configurationFilePath, _delimiter);
             try
             {
                 _settings = configurationFileReader.ReadConfigurationSettings();
@@ -61,25 +45,12 @@ namespace ConfigurationFileIO
         }
 
         /// <summary>
-        /// Get the settings for the configuration file safely.
-        /// </summary>
-        /// <returns></returns>
-        private ConfigurationSettings GetSettingsSafe()
-        {
-            if (_settings is null)
-            {
-                ReadSettings();
-            }
-
-            return _settings;
-        }
-
-        /// <summary>
         /// Write the settings to the configuration file.
         /// </summary>
-        public void WriteSettings()
+        /// <param name="configurationFilePath">The file path to the configuration file to write to.</param>
+        public void WriteSettings(string configurationFilePath)
         {
-            ConfigurationFileWriter configurationFileReader = new ConfigurationFileWriter(_configurationFilePath, _delimiter);
+            ConfigurationFileWriter configurationFileReader = new ConfigurationFileWriter(configurationFilePath, _delimiter);
             try
             {
                 configurationFileReader.WriteConfigurationSettings(_settings);
@@ -93,55 +64,55 @@ namespace ConfigurationFileIO
         ///<inheritdoc cref="ConfigurationSettings.CategoryExists(string)"/>
         public bool CategoryExists(string category)
         {
-            return GetSettingsSafe().CategoryExists(category);
+            return _settings.CategoryExists(category);
         }
 
         ///<inheritdoc cref="ConfigurationSettings.SettingExists"/>
         public bool SettingExists(string category, string settingName)
         {
-            return GetSettingsSafe().SettingExists(category, settingName);
+            return _settings.SettingExists(category, settingName);
         }
 
         ///<inheritdoc cref="ConfigurationSettings.GetSettingsCategories"/>
         public List<string> GetSettingsCategories()
         {
-            return GetSettingsSafe().GetSettingsCategories();
+            return _settings.GetSettingsCategories();
         }
 
         ///<inheritdoc cref="ConfigurationSettings.GetSettingsInCategory(string)"/>
         public List<string> GetSettingsInCategory(string category)
         {
-            return GetSettingsSafe().GetSettingsInCategory(category).Select(a => a.Name).ToList();
+            return _settings.GetSettingsInCategory(category).Select(a => a.Name).ToList();
         }
 
         ///<inheritdoc cref="ConfigurationSettings.GetSettingValue(string, string)"/>
         public ConfigurationValue GetSettingValue(string category, string settingName)
         {
-            return GetSettingsSafe().GetSettingValue(category, settingName);
+            return _settings.GetSettingValue(category, settingName);
         }
 
         /// <inheritdoc cref="ConfigurationSettings.AddSettingsCategory(string)"/>
         public void AddSettingsCategory(string category)
         {
-            GetSettingsSafe().AddSettingsCategory(category);
+            _settings.AddSettingsCategory(category);
         }
 
         /// <inheritdoc cref="ConfigurationSettings.RemoveSettingsCategory(string)"/>
         public void RemoveSettingsCategory(string category)
         {
-            GetSettingsSafe().RemoveSettingsCategory(category);
+            _settings.RemoveSettingsCategory(category);
         }
 
         /// <inheritdoc cref="ConfigurationSettings.AddNewSetting(string, ConfigurationSetting)"/>
         public void AddNewSetting(string category, string settingName, string settingValue)
         {
-            GetSettingsSafe().AddNewSetting(category, new ConfigurationSetting(settingName, settingValue));
+            _settings.AddNewSetting(category, new ConfigurationSetting(settingName, settingValue));
         }
 
         /// <inheritdoc cref="ConfigurationSettings.RemoveExistingSetting(string, string)"/>
         public void RemoveExistingSetting(string category, string settingName)
         {
-            GetSettingsSafe().RemoveExistingSetting(category, settingName);
+            _settings.RemoveExistingSetting(category, settingName);
         }
     }
 }

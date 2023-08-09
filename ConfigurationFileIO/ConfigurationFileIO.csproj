@@ -38,6 +38,8 @@
 	<Description>
       This library can be used to easily store and retrieve app settings in a configuration file.
     </Description>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -49,6 +51,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+	<None Include="README.md" Pack="true" PackagePath="\"/>
+	<None Include="LICENSE.txt" Pack="true" PackagePath=""/>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationFileIOExceptions.cs" />

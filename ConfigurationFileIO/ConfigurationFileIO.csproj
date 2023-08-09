@@ -31,6 +31,15 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\ConfigurationFileIO.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+	<PackageId>ConfigurationFileIO</PackageId>
+	<Version>1.0.0</Version>
+	<Authors>Tsaras</Authors>
+	<Description>
+      This library can be used to easily store and retrieve app settings in a configuration file.
+    </Description>
+  </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

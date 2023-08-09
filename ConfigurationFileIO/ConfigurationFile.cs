@@ -11,6 +11,7 @@ namespace ConfigurationFileIO
     /// </summary>
     public class ConfigurationFile
     {
+        private string _configurationFilePath;
         private ConfigurationSettings _settings = new ConfigurationSettings();
         private char _delimiter;
 
@@ -20,20 +21,21 @@ namespace ConfigurationFileIO
         /// Use <see cref="CategoryExists(string)"/> and <see cref="SettingExists(string, string)"/> to check if a category
         /// or a setting exists in the configuration file.
         /// </summary>
+        /// <param name="configurationFilePath">The file path to the configuration file.</param>
         /// <param name="demiliter">Delimiter which will separate setting names from values.</param>
-        public ConfigurationFile(char demiliter='=')
+        public ConfigurationFile(string configurationFilePath, char demiliter='=')
         {
+            _configurationFilePath = configurationFilePath;
             _delimiter = demiliter;
         }
 
         /// <summary>
         /// Read the settings from the configuration file.
         /// </summary>
-        /// <param name="configurationFilePath">The file to the configuration file to read from.</param>
         /// <exception cref="AccessingConfigurationFileFailed"></exception>
-        public void ReadSettings(string configurationFilePath)
+        public void ReadSettings()
         {
-            ConfigurationFileReader configurationFileReader = new ConfigurationFileReader(configurationFilePath, _delimiter);
+            ConfigurationFileReader configurationFileReader = new ConfigurationFileReader(_configurationFilePath, _delimiter);
             try
             {
                 _settings = configurationFileReader.ReadConfigurationSettings();
@@ -47,10 +49,9 @@ namespace ConfigurationFileIO
         /// <summary>
         /// Write the settings to the configuration file.
         /// </summary>
-        /// <param name="configurationFilePath">The file path to the configuration file to write to.</param>
-        public void WriteSettings(string configurationFilePath)
+        public void WriteSettings()
         {
-            ConfigurationFileWriter configurationFileReader = new ConfigurationFileWriter(configurationFilePath, _delimiter);
+            ConfigurationFileWriter configurationFileReader = new ConfigurationFileWriter(_configurationFilePath, _delimiter);
             try
             {
                 configurationFileReader.WriteConfigurationSettings(_settings);
@@ -89,6 +90,12 @@ namespace ConfigurationFileIO
         public ConfigurationValue GetSettingValue(string category, string settingName)
         {
             return _settings.GetSettingValue(category, settingName);
+        }
+
+        ///<inheritdoc cref="ConfigurationSettings.SetSettingValue(string, string, string)"/>
+        public void SetSettingValue(string category, string settingName, string settingValue)
+        {
+            _settings.SetSettingValue(category, settingName, settingValue);
         }
 
         /// <inheritdoc cref="ConfigurationSettings.AddSettingsCategory(string)"/>

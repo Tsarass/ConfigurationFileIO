@@ -1,6 +1,5 @@
-ConfigurationFileIO
 
-Features and quick reference to the package functionality:
+# ConfigurationFileIO
 
 Store settings of an application to a configuration file.
 Settings can have a category, a name and a value.
@@ -9,8 +8,12 @@ Custom delimiter supported in case the default one (=) is required in the settin
 
 Supported value types: string, int, double, boolean.
 
-Example usage C#:
 
+
+
+## Usage/Examples
+
+```c#
 // Read settings from a configuration file.
 ConfigurationFile configurationFile = new ConfigurationFile("settings.cfg");
 configurationFile.ReadSettings();
@@ -25,3 +28,5 @@ ConfigurationFile.AddNewSetting("LogIn", "AutoLoginUsername", "User");
 
 // Save the configuration file with the changes.
 configurationFile.SaveSettings();
+```
+

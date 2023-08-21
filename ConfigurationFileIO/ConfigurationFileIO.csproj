@@ -33,13 +33,17 @@
   </PropertyGroup>
   <PropertyGroup>
 	<PackageId>ConfigurationFileIO</PackageId>
-	<Version>1.0.0</Version>
-	<Authors>Tsaras</Authors>
+	<Version>1.0.1</Version>
+	<Authors>Christos Tsaridis</Authors>
+	<Owners>Christos Tsaridis</Owners>
+	<Tags>configuration settings ini</Tags>
 	<Description>
       This library can be used to easily store and retrieve app settings in a configuration file.
     </Description>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+	<RepositoryUrl>https://github.com/Tsarass/ConfigurationFileIO</RepositoryUrl> 
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>

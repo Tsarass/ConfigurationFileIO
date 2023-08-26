@@ -32,20 +32,19 @@
     <DocumentationFile>bin\Release\ConfigurationFileIO.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-	<PackageId>ConfigurationFileIO</PackageId>
-	<Version>1.0.1</Version>
-	<Authors>Christos Tsaridis</Authors>
-	<Owners>Christos Tsaridis</Owners>
-	<PackageTags>configuration;settings;ini</PackageTags>
-	<Description>
+    <PackageId>ConfigurationFileIO</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>Christos Tsaridis</Authors>
+    <Owners>Christos Tsaridis</Owners>
+    <PackageTags>configuration;settings;ini</PackageTags>
+    <Description>
       This library can be used to easily store and retrieve app settings in a configuration file.
     </Description>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-	<RepositoryUrl>https://github.com/Tsarass/ConfigurationFileIO</RepositoryUrl> 
+    <PackageReadmeFile>..\README.md</PackageReadmeFile>
+    <PackageLicenseFile>..\LICENSE.txt</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/Tsarass/ConfigurationFileIO</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,8 +54,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-	<None Include="README.md" Pack="true" PackagePath="\"/>
-	<None Include="LICENSE.txt" Pack="true" PackagePath=""/>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationFileIOExceptions.cs" />

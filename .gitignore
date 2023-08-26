@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /TestLibrary/TestLibrary.csproj
 /TestLibrary
+/ConfigurationFileIO/License.txt
+/ConfigurationFileIO/README.md

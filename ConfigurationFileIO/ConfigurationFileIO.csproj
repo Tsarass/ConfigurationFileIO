@@ -33,15 +33,15 @@
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>ConfigurationFileIO</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Christos Tsaridis</Authors>
     <Owners>Christos Tsaridis</Owners>
     <PackageTags>configuration;settings;ini</PackageTags>
     <Description>
       This library can be used to easily store and retrieve app settings in a configuration file.
     </Description>
-    <PackageReadmeFile>..\README.md</PackageReadmeFile>
-    <PackageLicenseFile>..\LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <RepositoryUrl>https://github.com/Tsarass/ConfigurationFileIO</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
@@ -64,6 +64,10 @@
     <Compile Include="Models\ConfigurationSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigurationFile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(SolutionDir)LICENSE.txt" Pack="true" PackagePath="" />
+	<None Include="$(SolutionDir)README.md" Pack="true" PackagePath="" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

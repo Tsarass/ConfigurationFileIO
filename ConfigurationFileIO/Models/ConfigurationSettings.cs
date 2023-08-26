@@ -175,20 +175,5 @@ namespace ConfigurationFileIO.Models
                 settingWithName.SetValue(settingValue);
             }
         }
-
-        internal void SetSettingValue(string category, string settingName, int settingValue)
-        {
-            SetSettingValue(category, settingName, settingValue.ToString());
-        }
-
-        internal void SetSettingValue(string category, string settingName, double settingValue)
-        {
-            SetSettingValue(category, settingName, settingValue.ToString());
-        }
-
-        internal void SetSettingValue(string category, string settingName, bool settingValue)
-        {
-            SetSettingValue(category, settingName, settingValue.ToString());
-        }
     }
 }

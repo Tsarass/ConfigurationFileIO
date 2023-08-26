@@ -23,6 +23,7 @@ namespace ConfigurationFileIO.Models
         /// Read from the configuration file with the specified file path.
         /// </summary>
         /// <param name="configurationFilePath"></param>
+        /// <param name="delimiter"></param>
         internal ConfigurationFileReader(string configurationFilePath, char delimiter)
         {
             _configurationFilePath = configurationFilePath;

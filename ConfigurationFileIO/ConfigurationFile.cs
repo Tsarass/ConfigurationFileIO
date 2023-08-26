@@ -98,6 +98,24 @@ namespace ConfigurationFileIO
             _settings.SetSettingValue(category, settingName, settingValue);
         }
 
+        ///<inheritdoc cref="ConfigurationSettings.SetSettingValue(string, string, string)"/>
+        public void SetSettingValue(string category, string settingName, int settingValue)
+        {
+            SetSettingValue(category, settingName, settingValue.ToString());
+        }
+
+        ///<inheritdoc cref="ConfigurationSettings.SetSettingValue(string, string, string)"/>
+        public void SetSettingValue(string category, string settingName, double settingValue)
+        {
+            SetSettingValue(category, settingName, settingValue.ToString());
+        }
+
+        ///<inheritdoc cref="ConfigurationSettings.SetSettingValue(string, string, string)"/>
+        public void SetSettingValue(string category, string settingName, bool settingValue)
+        {
+            SetSettingValue(category, settingName, settingValue.ToString());
+        }
+
         /// <inheritdoc cref="ConfigurationSettings.AddSettingsCategory(string)"/>
         public void AddSettingsCategory(string category)
         {
@@ -114,6 +132,24 @@ namespace ConfigurationFileIO
         public void AddNewSetting(string category, string settingName, string settingValue)
         {
             _settings.AddNewSetting(category, new ConfigurationSetting(settingName, settingValue));
+        }
+
+        /// <inheritdoc cref="ConfigurationSettings.AddNewSetting(string, ConfigurationSetting)"/>
+        public void AddNewSetting(string category, string settingName, int settingValue)
+        {
+            AddNewSetting(category, settingName, settingValue.ToString());
+        }
+
+        /// <inheritdoc cref="ConfigurationSettings.AddNewSetting(string, ConfigurationSetting)"/>
+        public void AddNewSetting(string category, string settingName, double settingValue)
+        {
+            AddNewSetting(category, settingName, settingValue.ToString());
+        }
+
+        /// <inheritdoc cref="ConfigurationSettings.AddNewSetting(string, ConfigurationSetting)"/>
+        public void AddNewSetting(string category, string settingName, bool settingValue)
+        {
+            AddNewSetting(category, settingName, settingValue.ToString());
         }
 
         /// <inheritdoc cref="ConfigurationSettings.RemoveExistingSetting(string, string)"/>

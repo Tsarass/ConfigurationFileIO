@@ -34,5 +34,18 @@ namespace ConfigurationFileIO
 
             }
         }
+
+        /// <summary>
+        /// A setting value was requested with the wrong format.
+        /// </summary>
+        public class InvalidRequestedSettingFormat : Exception
+        {
+            /// <summary>
+            /// A setting value was requested with the wrong format.
+            /// </summary>
+            public InvalidRequestedSettingFormat(Type requestedValueType)
+                : base($"Invalid format for setting requested: {requestedValueType.Name}")
+            { }
+        }
     }
 }

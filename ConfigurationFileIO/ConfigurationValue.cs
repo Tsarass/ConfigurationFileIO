@@ -1,4 +1,5 @@
 ﻿using System;
+using static ConfigurationFileIO.ConfigurationFileIOExceptions;
 
 namespace ConfigurationFileIO
 {
@@ -54,7 +55,7 @@ namespace ConfigurationFileIO
             bool isInteger = int.TryParse(_value, out int result);
             if (!isInteger)
             {
-                throw new InvalidOperationException();
+                throw new InvalidRequestedSettingFormat(typeof(int));
             }
 
             return result;
@@ -70,7 +71,7 @@ namespace ConfigurationFileIO
             bool isDouble = int.TryParse(_value, out int result);
             if (!isDouble)
             {
-                throw new InvalidOperationException();
+                throw new InvalidRequestedSettingFormat(typeof(double));
             }
 
             return result;
@@ -86,7 +87,7 @@ namespace ConfigurationFileIO
             bool isBoolean = bool.TryParse(_value, out bool result);
             if (!isBoolean)
             {
-                throw new InvalidOperationException();
+                throw new InvalidRequestedSettingFormat(typeof(bool));
             }
 
             return result;

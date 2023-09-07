@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ConfigurationFileIO.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,11 +32,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DocumentationFile>bin\Release\ConfigurationFileIO.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>ConfigurationFileIO</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>Christos Tsaridis</Authors>
     <Owners>Christos Tsaridis</Owners>
     <PackageTags>configuration;settings;ini</PackageTags>
@@ -41,7 +45,7 @@
       This library can be used to easily store and retrieve app settings in a configuration file.
     </Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-	<PackageReleaseNotes>
+    <PackageReleaseNotes>
 		Added a more descriptive exception when read setting values are converted to a specific format.
     </PackageReleaseNotes>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -70,7 +74,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(SolutionDir)LICENSE.txt" Pack="true" PackagePath="" />
-	<None Include="$(SolutionDir)README.md" Pack="true" PackagePath="" />
+    <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="" />
+    <None Include="bin\Release\ConfigurationFileIO.xml" Pack="true">
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\NuGet.Build.Tasks.Pack.6.7.0\build\NuGet.Build.Tasks.Pack.targets" Condition="Exists('..\packages\NuGet.Build.Tasks.Pack.6.7.0\build\NuGet.Build.Tasks.Pack.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NuGet.Build.Tasks.Pack.6.7.0\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Build.Tasks.Pack.6.7.0\build\NuGet.Build.Tasks.Pack.targets'))" />
+  </Target>
 </Project>

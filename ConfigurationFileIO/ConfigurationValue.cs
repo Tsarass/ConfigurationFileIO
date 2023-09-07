@@ -14,18 +14,21 @@ namespace ConfigurationFileIO
         /// <returns></returns>
         public static ConfigurationValue CreateEmpty()
         {
-            return new ConfigurationValue(string.Empty);
+            return new ConfigurationValue(string.Empty, isEmpty: true);
         }
 
         private string _value;
+        private bool _isEmpty;
 
         /// <summary>
         /// Create a value for a configuration setting.
         /// </summary>
         /// <param name="value"></param>
-        internal ConfigurationValue(string value)
+        /// <param name="isEmpty"></param>
+        internal ConfigurationValue(string value, bool isEmpty = false)
         {
             _value = value;
+            _isEmpty = isEmpty;
         }
 
         /// <summary>
@@ -40,8 +43,11 @@ namespace ConfigurationFileIO
         /// <summary>
         /// Get the value of this setting as a string.
         /// </summary>
-        public string AsString()
+        /// <param name="defaultValue">Default value to use if no value was found.</param>
+        public string AsString(string defaultValue = default(string))
         {
+            if (_isEmpty) return defaultValue;
+
             return _value;
         }
 
@@ -49,9 +55,12 @@ namespace ConfigurationFileIO
         /// Get the value of this setting as an integer.
         /// </summary>
         /// <returns></returns>
+        /// <param name="defaultValue">Default value to use if no value was found.</param>
         /// <exception cref="InvalidOperationException"></exception>
-        public int AsInteger()
+        public int AsInteger(int defaultValue = default(int))
         {
+            if (_isEmpty) return defaultValue;
+
             bool isInteger = int.TryParse(_value, out int result);
             if (!isInteger)
             {
@@ -65,9 +74,12 @@ namespace ConfigurationFileIO
         /// Get the value of this setting as a double.
         /// </summary>
         /// <returns></returns>
+        /// <param name="defaultValue">Default value to use if no value was found.</param>
         /// <exception cref="InvalidOperationException"></exception>
-        public double AsDouble()
+        public double AsDouble(double defaultValue = default(double))
         {
+            if (_isEmpty) return defaultValue;
+
             bool isDouble = int.TryParse(_value, out int result);
             if (!isDouble)
             {
@@ -81,9 +93,12 @@ namespace ConfigurationFileIO
         /// Get the value of this setting as a boolean.
         /// </summary>
         /// <returns></returns>
+        /// <param name="defaultValue">Default value to use if no value was found.</param>
         /// <exception cref="InvalidOperationException"></exception>
-        public bool AsBoolean()
+        public bool AsBoolean(bool defaultValue = default(bool))
         {
+            if (_isEmpty) return defaultValue;
+
             bool isBoolean = bool.TryParse(_value, out bool result);
             if (!isBoolean)
             {
@@ -93,19 +108,32 @@ namespace ConfigurationFileIO
             return result;
         }
 
+        /// <summary>
+        /// Check for value equality.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             ConfigurationValue other = obj as ConfigurationValue;
             if (other == null) return false;
 
-            return this._value == other._value;
+            return this._value == other._value && this._isEmpty == other._isEmpty;
         }
 
+        /// <summary>
+        /// Default hash code function.
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode() 
         {
             return _value.GetHashCode();
         }
 
+        /// <summary>
+        /// Get the value as string.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return _value;

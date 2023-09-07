@@ -2,7 +2,6 @@
 using System.Linq;
 using static ConfigurationFileIO.ConfigurationFileIOExceptions;
 using ConfigurationFileIO.Models;
-using System.IO;
 
 namespace ConfigurationFileIO
 {
@@ -62,97 +61,178 @@ namespace ConfigurationFileIO
             }
         }
 
-        ///<inheritdoc cref="ConfigurationSettings.CategoryExists(string)"/>
+        /// <summary>
+        /// Check if a category exists in the configuration settings.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         public bool CategoryExists(string category)
         {
             return _settings.CategoryExists(category);
         }
 
-        ///<inheritdoc cref="ConfigurationSettings.SettingExists"/>
+        /// <summary>
+        /// Check if a setting exists in the specified category in the configuration settings.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="settingName"></param>
+        /// <returns></returns>
         public bool SettingExists(string category, string settingName)
         {
             return _settings.SettingExists(category, settingName);
         }
 
-        ///<inheritdoc cref="ConfigurationSettings.GetSettingsCategories"/>
+        /// <summary>
+        /// Get the setting categories.
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetSettingsCategories()
         {
             return _settings.GetSettingsCategories();
         }
 
-        ///<inheritdoc cref="ConfigurationSettings.GetSettingsInCategory(string)"/>
+        /// <summary>
+        /// Get the settings in the specified category.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns>The settings in the specified category or empty list if the category does not exist.</returns>
         public List<string> GetSettingsInCategory(string category)
         {
             return _settings.GetSettingsInCategory(category).Select(a => a.Name).ToList();
         }
 
-        ///<inheritdoc cref="ConfigurationSettings.GetSettingValue(string, string)"/>
+        /// <summary>
+        /// Get the value of a setting. 
+        /// </summary>
+        /// <param name="category">Category of the setting.</param>
+        /// <param name="settingName">Setting name.</param>
+        /// <returns>The value of the setting if it exists. Returns an empty value if it doesn't exist.</returns>
         public ConfigurationValue GetSettingValue(string category, string settingName)
         {
             return _settings.GetSettingValue(category, settingName);
         }
 
-        ///<inheritdoc cref="ConfigurationSettings.SetSettingValue(string, string, string)"/>
+        /// <summary>
+        /// Set the value of a setting. If the setting does not exist, it will be created.
+        /// </summary>
+        /// <param name="category">Category of the setting.</param>
+        /// <param name="settingName">Setting name.</param>
+        /// <param name="settingValue">Value for the setting.</param>
         public void SetSettingValue(string category, string settingName, string settingValue)
         {
             _settings.SetSettingValue(category, settingName, settingValue);
         }
 
-        ///<inheritdoc cref="ConfigurationSettings.SetSettingValue(string, string, string)"/>
+        /// <summary>
+        /// Set the value of a setting. If the setting does not exist, it will be created.
+        /// </summary>
+        /// <param name="category">Category of the setting.</param>
+        /// <param name="settingName">Setting name.</param>
+        /// <param name="settingValue">Value for the setting.</param>
         public void SetSettingValue(string category, string settingName, int settingValue)
         {
             SetSettingValue(category, settingName, settingValue.ToString());
         }
 
-        ///<inheritdoc cref="ConfigurationSettings.SetSettingValue(string, string, string)"/>
+        /// <summary>
+        /// Set the value of a setting. If the setting does not exist, it will be created.
+        /// </summary>
+        /// <param name="category">Category of the setting.</param>
+        /// <param name="settingName">Setting name.</param>
+        /// <param name="settingValue">Value for the setting.</param>
         public void SetSettingValue(string category, string settingName, double settingValue)
         {
             SetSettingValue(category, settingName, settingValue.ToString());
         }
 
-        ///<inheritdoc cref="ConfigurationSettings.SetSettingValue(string, string, string)"/>
+        /// <summary>
+        /// Set the value of a setting. If the setting does not exist, it will be created.
+        /// </summary>
+        /// <param name="category">Category of the setting.</param>
+        /// <param name="settingName">Setting name.</param>
+        /// <param name="settingValue">Value for the setting.</param>
         public void SetSettingValue(string category, string settingName, bool settingValue)
         {
             SetSettingValue(category, settingName, settingValue.ToString());
         }
 
-        /// <inheritdoc cref="ConfigurationSettings.AddSettingsCategory(string)"/>
+        /// <summary>
+        /// Add a new settings category if it does not exist. If the supplied category exists, nothing will happen.
+        /// </summary>
+        /// <param name="category"></param>
         public void AddSettingsCategory(string category)
         {
             _settings.AddSettingsCategory(category);
         }
 
-        /// <inheritdoc cref="ConfigurationSettings.RemoveSettingsCategory(string)"/>
+        /// <summary>
+        /// Remove a settings category if it exists. If the supplied category does not exist, nothing will happen.
+        /// </summary>
+        /// <param name="category"></param>
         public void RemoveSettingsCategory(string category)
         {
             _settings.RemoveSettingsCategory(category);
         }
 
-        /// <inheritdoc cref="ConfigurationSettings.AddNewSetting(string, ConfigurationSetting)"/>
+        /// <summary>
+        /// Add a new configuration setting to a category.<br/>
+        /// If the supplied category does not exist, it will be created.<br/>
+        /// If the setting with the specified name already exists, it will be overwritten.
+        /// </summary>
+        /// <param name="category">Setting category.</param>
+        /// <param name="settingName">Setting name.</param>
+        /// <param name="settingValue">Setting value.</param>
         public void AddNewSetting(string category, string settingName, string settingValue)
         {
             _settings.AddNewSetting(category, new ConfigurationSetting(settingName, settingValue));
         }
 
-        /// <inheritdoc cref="ConfigurationSettings.AddNewSetting(string, ConfigurationSetting)"/>
+        /// <summary>
+        /// Add a new configuration setting to a category.<br/>
+        /// If the supplied category does not exist, it will be created.<br/>
+        /// If the setting with the specified name already exists, it will be overwritten.
+        /// </summary>
+        /// <param name="category">Setting category.</param>
+        /// <param name="settingName">Setting name.</param>
+        /// <param name="settingValue">Setting value.</param>
         public void AddNewSetting(string category, string settingName, int settingValue)
         {
             AddNewSetting(category, settingName, settingValue.ToString());
         }
 
-        /// <inheritdoc cref="ConfigurationSettings.AddNewSetting(string, ConfigurationSetting)"/>
+        /// <summary>
+        /// Add a new configuration setting to a category.<br/>
+        /// If the supplied category does not exist, it will be created.<br/>
+        /// If the setting with the specified name already exists, it will be overwritten.
+        /// </summary>
+        /// <param name="category">Setting category.</param>
+        /// <param name="settingName">Setting name.</param>
+        /// <param name="settingValue">Setting value.</param>
         public void AddNewSetting(string category, string settingName, double settingValue)
         {
             AddNewSetting(category, settingName, settingValue.ToString());
         }
 
-        /// <inheritdoc cref="ConfigurationSettings.AddNewSetting(string, ConfigurationSetting)"/>
+        /// <summary>
+        /// Add a new configuration setting to a category.<br/>
+        /// If the supplied category does not exist, it will be created.<br/>
+        /// If the setting with the specified name already exists, it will be overwritten.
+        /// </summary>
+        /// <param name="category">Setting category.</param>
+        /// <param name="settingName">Setting name.</param>
+        /// <param name="settingValue">Setting value.</param>
         public void AddNewSetting(string category, string settingName, bool settingValue)
         {
             AddNewSetting(category, settingName, settingValue.ToString());
         }
 
-        /// <inheritdoc cref="ConfigurationSettings.RemoveExistingSetting(string, string)"/>
+
+        /// <summary>
+        /// Remove an existing setting with the specified name from a category.
+        /// If the supplied category or setting does not exist, nothing will happen.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="settingName"></param>
         public void RemoveExistingSetting(string category, string settingName)
         {
             _settings.RemoveExistingSetting(category, settingName);

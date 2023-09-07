@@ -40,6 +40,10 @@ configurationFile.SetSettingValue("LogIn", "AutoLogin", !autoLogin);
 // Add a new setting AutoLoginUsername.
 configurationFile.AddNewSetting("LogIn", "AutoLoginUsername", "User");
 
+// Get the value of a non-existent setting and specify a default value.
+int maxFalseAttempts = configurationFile.GetSettingValue("LogIn", "MaxFalseAttempts").AsInteger(3);
+// maxFalseAttempts = 3.
+
 // Save the configuration file with the changes.
 configurationFile.WriteSettings();
 ```
